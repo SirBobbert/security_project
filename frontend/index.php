@@ -10,9 +10,10 @@
 
 <body>
 
-    <?php require './components/header.php'?>
-    <?php require './components/login.php'?>
-    <?php require './components/content.php'?>
+    <?php include 'components/header.php'; ?>
+    <?php include 'components/login.php'; ?>
+    <?php include 'components/content.php'; ?>
+
 
 </body>
 
