@@ -25,8 +25,11 @@ get('/demo/test/$name', 'api/api.php');
 //login
 get('/demo/login', 'frontend/user/login.php');
 
-//admin
+//admin homepage
 get('/demo/admin/home', 'frontend/admin/homepage.php');
+
+//admin homepage
+get('/demo/user/home', 'frontend/user/homepage.php');
 
 //users
 get('/demo/getUsers', 'frontend/admin/user/getUsers.php');
