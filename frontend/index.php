@@ -10,10 +10,16 @@
 
 <body>
 
-    <?php include 'components/header.php'; ?>
-    <?php include 'components/login.php'; ?>
-    <?php include 'components/content.php'; ?>
 
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+    <?php include 'components/login.php'; ?>
 
 </body>
 
