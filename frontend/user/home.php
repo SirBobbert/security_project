@@ -18,8 +18,9 @@
         die("Database connection failed: " . mysqli_connect_error());
     }
 
-    $email = "bobbert@test.dk"; // Replace with the actual email
-    $password = "1234"; // Replace with the actual password
+    // Get email and password from the URL parameters
+    $email = isset($_GET['email']) ? $_GET['email'] : '';
+    $password = isset($_GET['password']) ? $_GET['password'] : '';
 
     // Prepare the query with placeholders
     $query = "SELECT * FROM users WHERE email=? AND password=?";
