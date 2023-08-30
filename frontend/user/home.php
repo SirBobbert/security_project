@@ -1,60 +1,55 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Welcome</title>
-</head>
-<body>
-    <h2>Welcome</h2>
-    <?php
-    // Replace this with your actual database connection code
-    $host = 'localhost';
-    $username = 'root';
-    $password = '';
-    $database = 'demo';
+<?php
+session_start();
 
-    $connection = mysqli_connect($host, $username, $password, $database);
+// Replace this with your actual database connection code
+$host = 'localhost';
+$username = 'root';
+$password = '';
+$database = 'demo';
 
-    if (!$connection) {
-        die("Database connection failed: " . mysqli_connect_error());
-    }
+$connection = mysqli_connect($host, $username, $password, $database);
 
-    // Get email and password from the URL parameters
-    $email = isset($_GET['email']) ? $_GET['email'] : '';
-    $password = isset($_GET['password']) ? $_GET['password'] : '';
+if (!$connection) {
+    die("Database connection failed: " . mysqli_connect_error());
+}
 
-    // Prepare the query with placeholders
-    $query = "SELECT * FROM users WHERE email=? AND password=?";
-    $stmt = mysqli_prepare($connection, $query);
+// Get email and password from the URL parameters
+$email = isset($_GET['email']) ? $_GET['email'] : '';
+$password = isset($_GET['password']) ? $_GET['password'] : '';
 
-    if ($stmt) {
-        // Bind the parameters
-        mysqli_stmt_bind_param($stmt, "ss", $email, $password);
+// Prepare the query with placeholders
+$query = "SELECT * FROM users WHERE email=? AND password=?";
+$stmt = mysqli_prepare($connection, $query);
 
-        // Execute the statement
-        mysqli_stmt_execute($stmt);
+if ($stmt) {
+    // Bind the parameters
+    mysqli_stmt_bind_param($stmt, "ss", $email, $password);
 
-        // Get the result
-        $result = mysqli_stmt_get_result($stmt);
+    // Execute the statement
+    mysqli_stmt_execute($stmt);
 
-        if ($result && mysqli_num_rows($result) == 1) {
-            // User exists
-            $user = mysqli_fetch_assoc($result);
-            echo "User found: ";
-            echo "Email: " . $user['email'] . "<br>";
-            echo "Password: " . $user['password'];
-            echo "User type: " . $user['typeID'];
-        } else {
-            // User doesn't exist
-            echo "User does not exist.";
-        }
+    // Get the result
+    $result = mysqli_stmt_get_result($stmt);
 
-        mysqli_stmt_close($stmt);
+    if ($result && mysqli_num_rows($result) == 1) {
+        // User exists
+        $user = mysqli_fetch_assoc($result);
+        echo "User found: ";
+        echo "Email: " . $user['email'] . "<br>";
+        echo "Password: " . $user['password'];
+        echo "User type: " . $user['typeID'];
     } else {
-        // Statement preparation failed
-        echo "Statement preparation error: " . mysqli_error($connection);
+        // User doesn't exist
+        $_SESSION['error'] = "User doesn't exist.";
+        header("Location: http://localhost/demo/login");
+        exit();
     }
 
-    mysqli_close($connection);
-    ?>
-</body>
-</html>
+    mysqli_stmt_close($stmt);
+} else {
+    // Statement preparation failed
+    echo "Statement preparation error: " . mysqli_error($connection);
+}
+
+mysqli_close($connection);
+?>
