@@ -1,41 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body>
-    <div class="container col-5 p-3 mt-5 shadow-lg rounded">
-        <form>
-            <!-- Email input -->
-            <div class="form-outline mb-4">
-                <input type="email" id="email" class="form-control" placeholder="Email" />
-            </div>
+    <h2>Login</h2>
+    <form method="get" action="/demo/user/homeget">
+        <label for="email">Email:</label>
+        <input type="text" name="email" required><br><br>
 
-            <!-- Password input -->
-            <div class="form-outline mb-4">
-                <input type="password" id="password" class="form-control" placeholder="Password" />
-            </div>
+        <label for="password">Password:</label>
+        <input type="password" name="password" required><br><br>
 
-            <!-- Submit button -->
-            <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
-
-            <!-- Register buttons -->
-            <div class="text-center">
-                <p>Not a member? <a href="/demo/register">
-                        Register
-                    </a></p>
-            </div>
-
-
-
-
-        </form>
-    </div>
+        <input type="submit" value="Login">
+    </form>
 </body>
 
 </html>
+

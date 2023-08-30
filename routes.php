@@ -13,11 +13,7 @@ get('/demo/test/$name', 'api/api.php');
 
 
 
-
-
-
-
-
+get('/demo/api/config', 'api/config/database.php');
 
 
 
@@ -25,11 +21,16 @@ get('/demo/test/$name', 'api/api.php');
 //login
 get('/demo/login', 'frontend/user/login.php');
 
+//logout
+get('/demo/logout', 'frontend/user/logout.php');
+
+
 //admin homepage
 get('/demo/admin/home', 'frontend/admin/homepage.php');
 
-//admin homepage
-get('/demo/user/home', 'frontend/user/homepage.php');
+//user homepage
+get('/demo/user/homeget', 'frontend/user/home.php');
+post('/demo/user/home', 'frontend/user/home.php');
 
 //users
 get('/demo/getUsers', 'frontend/admin/user/getUsers.php');
