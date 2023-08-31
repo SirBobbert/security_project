@@ -38,6 +38,22 @@ if ($stmt) {
         echo "Email: " . $user['email'] . "<br>";
         echo "Password: " . $user['password'];
         echo "User type: " . $user['typeID'];
+
+
+        // Check user's type and redirect accordingly
+        if ($user['typeID'] == 1) {
+            header("Location: /demo/admin/home");
+        } elseif ($user['typeID'] == 2) {
+            header("Location: /demo/user/home");
+        } else {
+            $_SESSION['error'] = "Invalid user type.";
+            header("Location: http://localhost/demo/login");
+        }
+        exit();
+
+
+
+
     } else {
         // User doesn't exist
         $_SESSION['error'] = "User doesn't exist.";

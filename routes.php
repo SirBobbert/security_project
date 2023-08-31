@@ -29,7 +29,6 @@ get('/demo/logout', 'frontend/user/logout.php');
 get('/demo/admin/home', 'frontend/admin/homepage.php');
 
 //user homepage
-get('/demo/user/homeget', 'frontend/user/home.php');
 post('/demo/user/home', 'frontend/user/home.php');
 
 //users
