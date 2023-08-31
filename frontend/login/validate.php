@@ -18,12 +18,12 @@ $email = isset($_POST['email']) ? $_POST['email'] : '';
 $password = isset($_POST['password']) ? $_POST['password'] : '';
 
 // Prepare the query with placeholders
-$query = "SELECT * FROM users WHERE email=? AND password=?";
+$query = "SELECT * FROM users WHERE email=?";
 $stmt = mysqli_prepare($connection, $query);
 
 if ($stmt) {
     // Bind the parameters
-    mysqli_stmt_bind_param($stmt, "ss", $email, $password);
+    mysqli_stmt_bind_param($stmt, "s", $email);
 
     // Execute the statement
     mysqli_stmt_execute($stmt);
@@ -34,26 +34,32 @@ if ($stmt) {
     if ($result && mysqli_num_rows($result) == 1) {
         // User exists
         $user = mysqli_fetch_assoc($result);
-        echo "User found: ";
-        echo "Email: " . $user['email'] . "<br>";
-        echo "Password: " . $user['password'];
-        echo "User type: " . $user['typeID'];
+        
+        // Retrieve the stored hashed password from the user data
+        $stored_hashed_password = $user['password'];
 
+        // Verify the provided password against the stored hash
+        if (password_verify($password, $stored_hashed_password)) {
+            // Password is correct
 
-        // Check user's type and redirect accordingly
-        if ($user['typeID'] == 1) {
-            $_SESSION['user_role'] = 'admin';
-            header("Location: /demo/index");
-        } elseif ($user['typeID'] == 2) {
-            $_SESSION['user_role'] = 'user';
-            header("Location: /demo/index");
+            // Check user's type and redirect accordingly
+            if ($user['typeID'] == 1) {
+                $_SESSION['user_role'] = 'admin';
+                header("Location: /demo/index");
+            } elseif ($user['typeID'] == 2) {
+                $_SESSION['user_role'] = 'user';
+                header("Location: /demo/index");
+            } else {
+                $_SESSION['error'] = "Invalid user type.";
+                header("Location: http://localhost/demo/login");
+            }
+            exit();
         } else {
-            $_SESSION['error'] = "Invalid user type.";
+            // Password is incorrect
+            $_SESSION['error'] = "Incorrect password.";
             header("Location: http://localhost/demo/login");
+            exit();
         }
-        exit();
-
-
     } else {
         // User doesn't exist
         $_SESSION['error'] = "User doesn't exist.";

@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 $role = $_SESSION['user_role'] ?? null;
@@ -51,5 +50,8 @@ get('/demo/index', 'frontend/index.php');
 get('/demo/login', 'frontend/login/login.php');
 post('/demo/validate', 'frontend/login/validate.php');
 post('/demo/logout', 'frontend/login/logout.php');
+
+get('/demo/testpls', 'api/api.php');
+
 
 any('/404', 'frontend/404.php');
