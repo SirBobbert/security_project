@@ -8,18 +8,40 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
+<?php
+include 'components/header.php'; // Include the header
+?>
+
+<br />
+
+<?php
+
+$role = $_SESSION['user_role'] ?? null;
+
+
+if ($role === 'admin') {
+    echo "Logged in as Admin.";
+    include 'admin/homepage.php';
+} elseif ($role === 'user') {
+    echo "Logged in as User.";
+    include 'user/homepage.php';
+}
+?>
+
+<br />
+
+<?php
+include 'components/footer.php'; // Include the header
+?>
+
+
+
 <body>
-
-
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-
-
-    <?php include 'components/login.php'; ?>
+    <div class="container">
+        <form action="/demo/logout" method="post">
+            <input type="submit" value="Logout" class="btn btn-primary btn-block">
+        </form>
+    </div>
 
 </body>
 

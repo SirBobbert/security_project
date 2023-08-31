@@ -14,7 +14,7 @@ echo "User Role: " . $_SESSION['user_role'];
 <body>
 
     <div class="container">
-        <h1>ADMIN HOME</h1>
+        <h1>USER HOME</h1>
         <table class="table table-bordered">
 
             <tbody>

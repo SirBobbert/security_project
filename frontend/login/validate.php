@@ -42,16 +42,16 @@ if ($stmt) {
 
         // Check user's type and redirect accordingly
         if ($user['typeID'] == 1) {
-            header("Location: /demo/admin/home");
+            $_SESSION['user_role'] = 'admin';
+            header("Location: /demo/index");
         } elseif ($user['typeID'] == 2) {
-            header("Location: /demo/user/home");
+            $_SESSION['user_role'] = 'user';
+            header("Location: /demo/index");
         } else {
             $_SESSION['error'] = "Invalid user type.";
             header("Location: http://localhost/demo/login");
         }
         exit();
-
-
 
 
     } else {
