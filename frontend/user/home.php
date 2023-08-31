@@ -14,8 +14,8 @@ if (!$connection) {
 }
 
 // Get email and password from the URL parameters
-$email = isset($_GET['email']) ? $_GET['email'] : '';
-$password = isset($_GET['password']) ? $_GET['password'] : '';
+$email = isset($_POST['email']) ? $_POST['email'] : '';
+$password = isset($_POST['password']) ? $_POST['password'] : '';
 
 // Prepare the query with placeholders
 $query = "SELECT * FROM users WHERE email=? AND password=?";
