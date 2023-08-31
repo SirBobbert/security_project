@@ -15,9 +15,8 @@ if (!$connection) {
 $email = 'test@test.dk';
 $password = '1234';
 
-// Hash the password using crypt() with a salt
-$salt = uniqid(mt_rand(), true); // Generate a random salt
-$hashedPassword = crypt($password, '$2a$12$' . $salt);
+// Hash the password using password_hash() (bcrypt)
+$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
 // Insert the user into the database
 $query = "INSERT INTO users (email, password) VALUES (?, ?)";
