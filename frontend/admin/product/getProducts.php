@@ -71,7 +71,7 @@
                                 product</a></td>
                         <td>
                             <form method="post"
-                                action="/demo/handleDelete/<?php echo isset($post['id']) ? $post['id'] : ''; ?>">
+                                action="/demo/handleDeleteProduct/<?php echo isset($post['id']) ? $post['id'] : ''; ?>">
                                 <input type="hidden" name="id" value="<?php echo isset($post['id']) ? $post['id'] : ''; ?>">
                                 <input type="submit" value="Delete Product">
                             </form>

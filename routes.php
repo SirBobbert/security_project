@@ -16,31 +16,43 @@ function checkAccess($requiredRole)
 // Admin routes
 if ($role === 'admin') {
     get('/demo/admin/home', 'frontend/admin/homepage.php');
-    get('/demo/getUsers', 'frontend/admin/user/getUsers.php');
-    get('/demo/getUser/$id', 'frontend/admin/user/getUser.php');
 
     //users
+    get('/demo/createUser', 'frontend/admin/user/createUser.php');
+    post('/demo/handleCreateUser', 'api/userAPI/handleCreateUser.php');
+
     get('/demo/getUsers', 'frontend/admin/user/getUsers.php');
     get('/demo/getUser/$id', 'frontend/admin/user/getUser.php');
-    get('/demo/editUser/$id', 'frontend/admin/user/getUser.php');
-    get('/demo/deleteUser/$id', 'frontend/admin/user/getUser.php');
-    get('/demo/register', 'frontend/user/register.php');
 
+    get('/demo/editUser/$id', 'frontend/admin/user/editUser.php');
+    post('/demo/handleEditUser/$id', 'api/userAPI/handleEditUser.php');
 
-
+    post('/demo/handleDeleteUser/$id', 'api/userAPI/handleDeleteUser.php');
 
     //products
-    // skal kunne tilgås af alle brugere
+    get('/demo/createProduct', 'frontend/admin/product/createProduct.php');
+    post('/demo/handleCreateProduct', 'api/productAPI/handleCreateProduct.php');
+
     get('/demo/getProducts', 'frontend/admin/product/getProducts.php');
     get('/demo/getProduct/$id', 'frontend/admin/product/getProduct.php');
 
     get('/demo/editProduct/$id', 'frontend/admin/product/editProduct.php');
     post('/demo/handleEditProduct/$id', 'api/productAPI/handleEditProduct.php');
 
-    post('/demo/handleDelete/$id', 'api/productAPI/handleDelete.php');
+    post('/demo/handleDeleteProduct/$id', 'api/productAPI/handleDeleteProduct.php');
 
-    get('/demo/createProduct', 'frontend/admin/product/createProduct.php');
-    post('/demo/handleCreateProduct', 'api/productAPI/handleCreateProduct.php');
+
+
+    //todo
+    get('/demo/register', 'frontend/user/register.php');
+
+
+    //get users api
+    get('/demo/read', 'api/userAPI/read.php');
+    get('/demo/single_read', 'api/userAPI/single_read.php');
+    post('/demo/create', 'api/userAPI/create.php');
+    put('/demo/update', 'api/userAPI/update.php');
+    //delete('/demo/delete', 'api/userAPI/delete.php');
 
 
 
@@ -53,12 +65,7 @@ if ($role === 'admin') {
 
     //API
 
-    //get users api
-    get('/demo/read', 'api/userAPI/read.php');
-    get('/demo/single_read', 'api/userAPI/single_read.php');
-    post('/demo/create', 'api/userAPI/create.php');
-    put('/demo/update', 'api/userAPI/update.php');
-    delete('/demo/delete', 'api/userAPI/delete.php');
+
 
     // products api
     post('/demo/createProduct', 'api/productAPI/createProduct.php');
