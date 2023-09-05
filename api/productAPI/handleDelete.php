@@ -10,24 +10,21 @@
     
     $database = new Database();
     $db = $database->getConnection();
+    
     $item = new Product($db);
-    $item->id = isset($_GET['id']) ? $_GET['id'] : die();
+    
+    $data = json_decode(file_get_contents("php://input"));
 
-    $item->getSingleProduct();
-    if($item->name != null){
-        $product_arr = array(
-        "id" => $item->id,
-        "name" => $item->name,
-        "price" => $item->price,
-        "description" => $item->description
-        );
-        
-        http_response_code(200);
-        echo json_encode($product_arr);
+if (!isset($data->id)) {
+    echo json_encode("Missing 'id' field in the request.");
+} else {
+    $item->id = $data->id;
+    
+    if ($item->deleteProduct()) {
+        echo json_encode("Product deleted.");
+    } else {
+        echo json_encode("Product could not be deleted");
     }
-     
-    else{
-        http_response_code(404);
-        echo json_encode("Product not found.");
-    }
+}
 ?>
+

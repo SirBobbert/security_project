@@ -9,26 +9,35 @@
 
 <body>
     <?php
-    $dummyPosts = array(
-        array(
-            'id' => 1,
-            'title' => 'Post 1 Title',
-            'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            'price' => 19.99
-        ),
-        array(
-            'id' => 2,
-            'title' => 'Post 2 Title',
-            'content' => 'Pellentesque ac ligula in tellus feugiat lacinia.',
-            'price' => 29.99
-        ),
-        array(
-            'id' => 3,
-            'title' => 'Post 20 Title',
-            'content' => 'Vivamus vel tortor in ligula feugiat placerat.',
-            'price' => 49.99
-        )
-    );
+    require_once('api/Class/products.php');
+    require_once('api/config/database.php');
+
+    $database = new Database();
+    $db = $database->getConnection();
+    $items = new Product($db);
+    $stmt = $items->getProducts();
+    $itemCount = $stmt->rowCount();
+
+    if ($itemCount > 0) {
+
+        $productArray = array();
+        $productArray["body"] = array();
+        $productArray["itemCount"] = $itemCount;
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $e = array(
+                "id" => $row['id'],
+                "name" => $row['name'],
+                "price" => $row['price'],
+                "description" => $row['description']
+            );
+            array_push($productArray["body"], $e);
+        }
+    } else {
+        http_response_code(404);
+        echo json_encode(
+            array("message" => "No record found.")
+        );
+    }
     ?>
 
     <div class="container">
@@ -42,22 +51,29 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($dummyPosts as $post): ?>
+                <?php foreach ($productArray["body"] as $post): ?>
                     <tr>
                         <td>
-                            <?php echo $post['id']; ?>
+                            <?php echo isset($post['id']) ? $post['id'] : ''; ?>
                         </td>
                         <td>
-                            <?php echo $post['title']; ?>
+                            <?php echo isset($post['name']) ? $post['name'] : ''; ?>
                         </td>
                         <td>
-                            <?php echo $post['content']; ?>
+                            <?php echo isset($post['price']) ? $post['price'] : ''; ?>
                         </td>
-                        <td><a href="/demo/getProduct/<?php echo $post['id']; ?>">See more</a></td>
-                        <td><a href="/demo/editProduct/<?php echo $post['id']; ?>">Edit product</a></td>
-                        <td><a href="/demo/deleteProduct/<?php echo $post['id']; ?>">Delete product</a></td>
+                        <td>
+                            <?php echo isset($post['description']) ? $post['description'] : ''; ?>
+                        </td>
+                        <td><a href="/demo/getProduct/<?php echo isset($post['id']) ? $post['id'] : ''; ?>">See more</a>
+                        </td>
+                        <td><a href="/demo/editProduct/<?php echo isset($post['id']) ? $post['id'] : ''; ?>">Edit
+                                product</a></td>
+                        <td><a href="/demo/handleDelete/<?php echo isset($post['id']) ? $post['id'] : ''; ?>">Delete
+                                product</a></td>
                     </tr>
                 <?php endforeach; ?>
+
             </tbody>
         </table>
         <a class="btn btn-light" href="/demo/createProduct">
