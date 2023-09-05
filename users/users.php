@@ -8,7 +8,12 @@
 </head>
 
 <body>
-    <?= "Users age is $age and users name is $name" ?>
+<?php 
+$age = 11;
+$name = "mathias";
+echo "User's age is $age and user's name is $name"; 
+?>
+
 </body>
 
 </html>
