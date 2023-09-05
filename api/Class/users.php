@@ -35,22 +35,24 @@ class User
     public function createUser()
     {
         $sqlQuery = "INSERT INTO
-                    " . $this->db_table . "
-                SET
-                    email = :email, 
-                    password = :password, 
-                    typeID = :typeID";
+                " . $this->db_table . "
+            SET
+                email = :email, 
+                password = :password, 
+                typeID = :typeID";
 
         $stmt = $this->conn->prepare($sqlQuery);
 
         // Sanitize
         $this->email = htmlspecialchars(strip_tags($this->email));
-        $this->password = htmlspecialchars(strip_tags($this->password));
         $this->typeID = htmlspecialchars(strip_tags($this->typeID));
+
+        // Hash the password
+        $hashedPassword = password_hash($this->password, PASSWORD_BCRYPT);
 
         // Bind data
         $stmt->bindParam(":email", $this->email);
-        $stmt->bindParam(":password", $this->password);
+        $stmt->bindParam(":password", $hashedPassword); // Store the hashed password
         $stmt->bindParam(":typeID", $this->typeID);
 
         if ($stmt->execute()) {
@@ -58,6 +60,7 @@ class User
         }
         return false;
     }
+
 
 
     // READ single user
@@ -103,24 +106,33 @@ class User
         try {
             $sqlQuery = "UPDATE {$this->db_table}
                         SET
-                            email = :email, 
-                            password = :password, 
-                            typeID = :typeID
+                            email = :email, ";
+
+            // Check if the password field is empty or not
+            if (!empty($this->password)) {
+                $sqlQuery .= "password = :password, ";
+            }
+
+            $sqlQuery .= "typeID = :typeID
                         WHERE 
                             id = :id";
 
             $stmt = $this->conn->prepare($sqlQuery);
 
             $this->email = htmlspecialchars(strip_tags($this->email));
-            $this->password = htmlspecialchars(strip_tags($this->password));
             $this->typeID = htmlspecialchars(strip_tags($this->typeID));
             $this->id = htmlspecialchars(strip_tags($this->id));
 
             // Bind data
             $stmt->bindParam(":email", $this->email);
-            $stmt->bindParam(":password", $this->password);
             $stmt->bindParam(":typeID", $this->typeID);
             $stmt->bindParam(":id", $this->id, PDO::PARAM_INT);
+
+            // Check if the password field is not empty and hash the password
+            if (!empty($this->password)) {
+                $hashedPassword = password_hash($this->password, PASSWORD_BCRYPT);
+                $stmt->bindParam(":password", $hashedPassword);
+            }
 
             if ($stmt->execute()) {
                 return true;
@@ -131,6 +143,7 @@ class User
             return false;
         }
     }
+
 
 
     // DELETE

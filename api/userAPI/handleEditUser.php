@@ -1,9 +1,9 @@
 <?php
 // Include necessary files and initialize the database connection
-require_once('api/Class/users.php'); // Use 'users.php' for the User class
+require_once('api/class/users.php'); // Use 'users.php' for the User class
 require_once('api/config/database.php');
 
-// Check if the "_method" parameter is set to "PUT"
+// Check if the "_method" parameter is set to "POST"
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the updated data from the form
     $id = $_POST['id'];
@@ -21,8 +21,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Update the user data
     $user->email = $email;
-    $user->password = $password;
     $user->typeID = $typeID;
+    
+    // Check if the password has changed before passing it for updating
+    if (!empty($password)) {
+        $user->password = $password;
+    }
 
     // Check if the user was successfully updated
     if ($user->updateUser()) {

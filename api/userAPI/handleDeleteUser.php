@@ -1,6 +1,6 @@
 <?php
 // Include necessary files and initialize the database connection
-require_once('api/Class/users.php');
+require_once('api/class/users.php');
 require_once('api/config/database.php');
 
 // Check if the request method is POST

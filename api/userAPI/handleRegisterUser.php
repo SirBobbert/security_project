@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user->createUser()) {
         // Data inserted successfully
         echo "User created successfully";
-        header("Location: http://localhost/demo/getUsers");
+        header("Location: http://localhost/demo/login");
         exit();
     } else {
         // Error in inserting data

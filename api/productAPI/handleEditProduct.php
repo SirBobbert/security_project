@@ -1,6 +1,6 @@
 <?php
 // Include necessary files and initialize the database connection
-require_once('api/Class/products.php');
+require_once('api/class/products.php');
 require_once('api/config/database.php');
 
 // Check if the "_method" parameter is set to "PUT"
