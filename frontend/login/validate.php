@@ -51,7 +51,7 @@ if ($stmt) {
                 header("Location: /demo/index");
             } else {
                 $_SESSION['error'] = "Invalid user type.";
-                header("Location: http://localhost/demo/login");
+                header("Location: /demo/login");
             }
             exit();
         } else {

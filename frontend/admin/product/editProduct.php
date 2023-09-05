@@ -56,7 +56,6 @@ if (isset($id)) {
 
         <input type="hidden" name="id" value="<?php echo $product_arr['id']; ?>">
 
-
         <label for="name">Product Name:</label>
         <input type="text" id="name" name="name" value="<?php echo $product_arr['name']; ?>"><br>
 
@@ -70,4 +69,5 @@ if (isset($id)) {
     </form>
 
 </body>
+
 </html>

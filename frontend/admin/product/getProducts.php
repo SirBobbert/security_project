@@ -69,8 +69,15 @@
                         </td>
                         <td><a href="/demo/editProduct/<?php echo isset($post['id']) ? $post['id'] : ''; ?>">Edit
                                 product</a></td>
-                        <td><a href="/demo/handleDelete/<?php echo isset($post['id']) ? $post['id'] : ''; ?>">Delete
-                                product</a></td>
+                        <td>
+                            <form method="post"
+                                action="/demo/handleDelete/<?php echo isset($post['id']) ? $post['id'] : ''; ?>">
+                                <input type="hidden" name="id" value="<?php echo isset($post['id']) ? $post['id'] : ''; ?>">
+                                <input type="submit" value="Delete Product">
+                            </form>
+
+                        </td>
+
                     </tr>
                 <?php endforeach; ?>
 

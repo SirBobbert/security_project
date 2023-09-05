@@ -1,31 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Create Product</title>
 </head>
 
 <body>
-    <div class="container col-5 p-3 mt-5 shadow-lg rounded">
-        <form>
-            <div class="form-outline mb-4">
-                <input type="text" id="Name" class="form-control" placeholder="Name" />
-            </div>
-
-            <div class="form-outline mb-4">
-                <input type="text" id="Name" class="form-control" placeholder="Name" />
-            </div>
-
-            <div class="form-outline mb-4">
-                <input type="text" id="Name" class="form-control" placeholder="Name" />
-            </div>
-
-            <button type="button" class="btn btn-primary btn-block mb-4">Create product</button>
-
-        </form>
-    </div>
+    <form method="post" action="/demo/handleCreateProduct">
+        <input type="text" name="productName" placeholder="Product Name" required>
+        <input type="number" name="productPrice" placeholder="Price" required>
+        <textarea name="productDescription" placeholder="Description" required></textarea>
+        <button type="submit">Create Product</button>
+    </form>
 </body>
 
 </html>

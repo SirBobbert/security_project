@@ -9,12 +9,6 @@
 </head>
 
 <?php
-include 'components/header.php'; // Include the header
-?>
-
-<br />
-
-<?php
 
 $role = $_SESSION['user_role'] ?? null;
 
@@ -27,14 +21,6 @@ if ($role === 'admin') {
     include 'user/homepage.php';
 }
 ?>
-
-<br />
-
-<?php
-include 'components/footer.php'; // Include the header
-?>
-
-
 
 <body>
     <div class="container">

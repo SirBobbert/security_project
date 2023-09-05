@@ -26,17 +26,23 @@ if ($role === 'admin') {
     get('/demo/deleteUser/$id', 'frontend/admin/user/getUser.php');
     get('/demo/register', 'frontend/user/register.php');
 
+
+
+
     //products
+    // skal kunne tilgås af alle brugere
     get('/demo/getProducts', 'frontend/admin/product/getProducts.php');
     get('/demo/getProduct/$id', 'frontend/admin/product/getProduct.php');
 
     get('/demo/editProduct/$id', 'frontend/admin/product/editProduct.php');
     post('/demo/handleEditProduct/$id', 'api/productAPI/handleEditProduct.php');
 
-    delete('/demo/handleDelete/$id', 'api/productAPI/handleDelete.php');
+    post('/demo/handleDelete/$id', 'api/productAPI/handleDelete.php');
 
-    get('/demo/deleteProduct/$id', 'frontend/admin/product/deleteProduct.php');
     get('/demo/createProduct', 'frontend/admin/product/createProduct.php');
+    post('/demo/handleCreateProduct', 'api/productAPI/handleCreateProduct.php');
+
+
 
     //orders
     get('/demo/getOrders', 'frontend/admin/order/getOrders.php');
@@ -77,7 +83,7 @@ if ($role === 'user') {
 // Common routes that require login
 if ($role === 'user' || $role === 'admin') {
     //products api
-  
+
 }
 
 // can be accessed without being logged in
