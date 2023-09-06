@@ -32,9 +32,7 @@ if ($role === 'admin') {
     // product create 
     get('/demo/createProduct', 'frontend/admin/product/createProduct.php');
     post('/demo/handleCreateProduct', 'api/productAPI/handleCreateProduct.php');
-    // product read
-    get('/demo/getProducts', 'frontend/admin/product/getProducts.php');
-    get('/demo/getProduct/$id', 'frontend/admin/product/getProduct.php');
+
     // product update
     get('/demo/editProduct/$id', 'frontend/admin/product/editProduct.php');
     post('/demo/handleEditProduct/$id', 'api/productAPI/handleEditProduct.php');
@@ -57,12 +55,18 @@ if ($role === 'admin') {
 if ($role === 'user') {
     get('/demo/user/home', 'frontend/user/homepage.php');
 
+    get('/demo/handleAddToCart/$id', 'frontend/user/handleAddToCart.php');
+
+
+
 }
 
 // Common routes that require login
 if ($role === 'user' || $role === 'admin') {
     //products api
-
+// product read
+    get('/demo/getProducts', 'frontend/admin/product/getProducts.php');
+    get('/demo/getProduct/$id', 'frontend/admin/product/getProduct.php');
 }
 
 // can be accessed without being logged in
