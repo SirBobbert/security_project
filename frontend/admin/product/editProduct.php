@@ -60,18 +60,22 @@ if (isset($id)) {
 
             <div class="form-group">
                 <label for="name">Product Name:</label>
-                <input type="text" class="form-control" id="name" name="name" value="<?php echo $product_arr['name']; ?>">
+                <input type="text" class="form-control" id="name" name="name"
+                    value="<?php echo $product_arr['name']; ?>" required>
             </div>
 
             <div class="form-group">
                 <label for="price">Price:</label>
-                <input type="number" class="form-control" id="price" name="price" value="<?php echo $product_arr['price']; ?>">
+                <input type="number" class="form-control" id="price" name="price"
+                    value="<?php echo $product_arr['price']; ?>" required>
             </div>
 
             <div class="form-group">
                 <label for="description">Description:</label>
-                <textarea class="form-control" id="description" name="description"><?php echo $product_arr['description']; ?></textarea>
+                <textarea class="form-control" id="description" name="description"
+                    required><?php echo $product_arr['description']; ?></textarea>
             </div>
+
 
             <button type="submit" class="btn btn-primary">Update Product</button>
         </form>

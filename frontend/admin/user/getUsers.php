@@ -47,7 +47,7 @@
                     <th>#</th>
                     <th>Email</th>
                     <th>Password</th>
-                    <th>Type ID</th>
+                    <th>User type</th>
                 </tr>
             </thead>
             <tbody>
@@ -63,7 +63,19 @@
                             <?php echo isset($user['password']) ? $user['password'] : ''; ?>
                         </td>
                         <td>
-                            <?php echo isset($user['typeID']) ? $user['typeID'] : ''; ?>
+                            <?php
+                            if (isset($user['typeID'])) {
+                                if ($user['typeID'] == 1) {
+                                    echo 'Admin';
+                                } elseif ($user['typeID'] == 2) {
+                                    echo 'User';
+                                } else {
+                                    echo 'Unknown';
+                                }
+                            } else {
+                                echo 'Unknown';
+                            }
+                            ?>
                         </td>
                         <!-- Add more columns if needed -->
 

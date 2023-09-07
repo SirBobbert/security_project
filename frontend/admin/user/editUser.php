@@ -60,18 +60,22 @@ if (isset($id)) {
 
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="text" class="form-control" id="email" name="email" value="<?php echo $user_arr['email']; ?>">
+                <input type="text" class="form-control" id="email" name="email"
+                    value="<?php echo $user_arr['email']; ?>" required>
             </div>
 
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" class="form-control" id="password" name="password" value="<?php echo $user_arr['password']; ?>">
+                <input type="password" class="form-control" id="password" name="password"
+                    value="<?php echo $user_arr['password']; ?>" required>
             </div>
 
             <div class="form-group">
                 <label for="typeID">Type ID:</label>
-                <input type="text" class="form-control" id="typeID" name="typeID" value="<?php echo $user_arr['typeID']; ?>">
+                <input type="number" class="form-control" id="typeID" name="typeID"
+                    value="<?php echo $user_arr['typeID']; ?>" required>
             </div>
+
 
             <button type="submit" class="btn btn-primary">Update User</button>
         </form>
