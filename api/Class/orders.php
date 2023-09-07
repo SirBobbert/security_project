@@ -21,7 +21,7 @@ class Order
 
         $stmt->bindParam(1, $user_id);
         $stmt->bindParam(2, $order_date);
-        $stmt->bindParam(3, $total_amount, PDO::PARAM_STR); // Assuming total_amount is a string
+        $stmt->bindParam(3, $total_amount, PDO::PARAM_STR);
 
         if ($stmt->execute()) {
             return $this->conn->lastInsertId();
@@ -29,8 +29,6 @@ class Order
             return false;
         }
     }
-
-
 
     public function getOrderById($order_id)
     {
@@ -44,7 +42,5 @@ class Order
             return false;
         }
     }
-
-    // Add other methods for updating and deleting orders if needed
 }
 ?>

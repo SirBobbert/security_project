@@ -25,11 +25,6 @@ if (isset($_POST['id'])) {
         $_SESSION['cart'][$productId] = 1;
         $quantity = 1;
     }
-
-    // Debugging: Print the contents of the shopping cart
-    echo "Shopping Cart Contents: ";
-    print_r($_SESSION['cart']);
-
     // Redirect back to the product list page or display a success message
     header('Location: /demo/getProducts');
     exit();

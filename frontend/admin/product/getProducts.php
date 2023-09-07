@@ -119,11 +119,6 @@ if ($itemCount > 0) {
     <h2>Shopping Cart</h2>
     <ul>
         <?php
-
-        echo isset($post['id']) ? $post['id'] : '';
-
-
-
         // Check if the shopping cart session variable exists
         if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
             foreach ($_SESSION['cart'] as $productId => $quantity) {

@@ -23,7 +23,7 @@ class OrderLine
         $stmt->bindParam(1, $product_id);
         $stmt->bindParam(2, $product_price);
         $stmt->bindParam(3, $order_id);
-        $stmt->bindParam(4, $quantity); // Bind the quantity parameter
+        $stmt->bindParam(4, $quantity);
 
         if ($stmt->execute()) {
             return true;
@@ -31,7 +31,5 @@ class OrderLine
             return false;
         }
     }
-
-    // Add other methods for retrieving, updating, and deleting order lines if needed
 }
 ?>

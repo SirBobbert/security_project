@@ -34,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Clear the shopping cart
     unset($_SESSION['cart']);
 
-    // Redirect to a confirmation page or display a success message
     header('Location: /demo/getProducts');
     exit();
 }
@@ -53,10 +52,8 @@ function calculateTotalAmount($db, $cart)
             $totalAmount += $productPrice * $quantity;
         }
     }
-
     return $totalAmount;
 }
-
 
 
 function getProductPriceById($db, $productId)
