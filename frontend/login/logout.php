@@ -2,7 +2,10 @@
 // Initialize the session
 session_start();
 
-// Unset all of the session variables
+// Unset cart data (assuming 'cart' is the session variable storing cart data)
+unset($_SESSION['cart']);
+
+// Unset all of the other session variables
 $_SESSION = array();
 
 // Destroy the session.

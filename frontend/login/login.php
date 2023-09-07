@@ -1,4 +1,7 @@
 <?php
+// Initialize the session
+$_SESSION['cart'] = []; // Initialize an empty cart for the user
+
 // Check if an error message is stored in session
 if (isset($_SESSION['error'])) {
     $errorMessage = $_SESSION['error'];
