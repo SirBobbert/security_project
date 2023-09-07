@@ -76,7 +76,7 @@
                             <form method="post"
                                 action="/demo/handleDeleteUser/<?php echo isset($user['id']) ? $user['id'] : ''; ?>">
                                 <input type="hidden" name="id" value="<?php echo isset($user['id']) ? $user['id'] : ''; ?>">
-                                <input type="submit" value="Delete User">
+                                <input type="submit" value="Delete user">
                             </form>
                         </td>
                     </tr>

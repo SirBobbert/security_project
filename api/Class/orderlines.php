@@ -31,5 +31,30 @@ class OrderLine
             return false;
         }
     }
+
+    public function getOrderlinesByOrderID($orderID)
+    {
+        $sqlQuery = "SELECT products.name AS product_name, orderlines.product_price, orderlines.quantity, orders.total_amount AS total_price
+                 FROM orderlines
+                 JOIN products ON orderlines.product_id = products.id
+                 JOIN orders ON orderlines.order_id_fk = orders.order_id
+                 WHERE orderlines.order_id_fk = :order_id";
+
+        try {
+            $stmt = $this->conn->prepare($sqlQuery);
+            $stmt->bindParam(':order_id', $orderID, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Database error: " . $e->getMessage();
+            // Handle the exception, log, or return an error message
+            return false;
+        }
+    }
+
+
+
+
+
 }
 ?>

@@ -1,70 +1,105 @@
+<?php
+// Check if the user_role session variable is set
+$role = $_SESSION['user_role'] ?? null;
+
+require_once('api/class/orders.php'); // Replace with the correct path to your orders class
+require_once('api/config/database.php'); // Replace with the correct path to your database configuration
+
+// Assuming you have the user's role stored in the $role variable
+$userRole = $role;
+
+$database = new Database();
+$db = $database->getConnection();
+$orders = new Order($db); // Replace with the correct class for orders
+$stmt = $orders->getOrders(); // Replace with the correct method to retrieve orders
+$orderCount = $stmt->rowCount();
+
+if ($orderCount > 0) {
+
+    $orderArray = array();
+    $orderArray["body"] = array();
+    $orderArray["orderCount"] = $orderCount;
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $e = array(
+            "order_id" => $row['order_id'],
+            // Replace with the correct column names
+            "user_id" => $row['user_id'],
+            // Replace with the correct column names
+            "order_date" => $row['order_date'],
+            // Replace with the correct column names
+            "total_amount" => $row['total_amount'] // Replace with the correct column names
+        );
+        array_push($orderArray["body"], $e);
+    }
+} else {
+    http_response_code(404);
+    echo json_encode(
+        array("message" => "No record found.")
+    );
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>All orders</title>
+    <title>All Orders</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body>
-    <?php
-    $dummyPosts = array(
-        array(
-            'id' => 1,
-            'title' => 'Post 1 Title',
-            'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            'price' => 19.99
-        ),
-        array(
-            'id' => 2,
-            'title' => 'Post 2 Title',
-            'content' => 'Pellentesque ac ligula in tellus feugiat lacinia.',
-            'price' => 29.99
-        ),
-        array(
-            'id' => 3,
-            'title' => 'Post 20 Title',
-            'content' => 'Vivamus vel tortor in ligula feugiat placerat.',
-            'price' => 49.99
-        )
-    );
-    ?>
-
     <div class="container">
-        <h1>All orders</h1>
+        <h1>All Orders</h1>
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Title</th>
-                    <th>Content</th>
+                    <th>Order ID</th>
+                    <th>User ID</th>
+                    <th>Order Date</th>
+                    <th>Total Amount</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($dummyPosts as $post): ?>
+                <?php foreach ($orderArray["body"] as $order): ?>
                     <tr>
                         <td>
-                            <?php echo $post['id']; ?>
+                            <?php echo isset($order['order_id']) ? $order['order_id'] : ''; ?>
                         </td>
                         <td>
-                            <?php echo $post['title']; ?>
+                            <?php echo isset($order['user_id']) ? $order['user_id'] : ''; ?>
                         </td>
                         <td>
-                            <?php echo $post['content']; ?>
+                            <?php echo isset($order['order_date']) ? $order['order_date'] : ''; ?>
                         </td>
-                        <td><a href="/demo/getOrder/<?php echo $post['id']; ?>">See more</a></td>
-                        <td><a href="/demo/editOrder/<?php echo $post['id']; ?>">Edit product</a></td>
-                        <td><a href="/demo/deleteOrder/<?php echo $post['id']; ?>">Delete product</a></td>
+                        <td>
+                            <?php echo isset($order['total_amount']) ? $order['total_amount'] : ''; ?>
+                        </td>
+
+
+
+                        <td>
+                            <a href="/demo/getOrder/<?php echo isset($order['order_id']) ? $order['order_id'] : ''; ?>">See order</a>
+                        </td>
+
+                        <td><a href="/demo/editProduct/<?php echo isset($post['id']) ? $post['id'] : ''; ?>">Edit
+                                order</a></td>
+                        <td>
+                            <form method="post"
+                                action="/demo/handleDeleteProduct/<?php echo isset($post['id']) ? $post['id'] : ''; ?>">
+                                <input type="hidden" name="id" value="<?php echo isset($post['id']) ? $post['id'] : ''; ?>">
+                                <input type="submit" value="Delete order">
+                            </form>
+                        </td>
+
+
+
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <a class="btn btn-light" href="/demo/createProduct">
-            Create order
-        </a>
+        <a class="btn btn-primary" href="/demo/index">Back</a>
     </div>
-
 </body>
 
 </html>

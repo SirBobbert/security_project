@@ -60,16 +60,17 @@ function getProductPriceById($db, $productId)
 {
     $query = "SELECT price FROM products WHERE id = :id";
     $stmt = $db->prepare($query);
-    $stmt->bindParam(':id', $productId, PDO::PARAM_INT);
+    $stmt->bindParam(':id', $productId, PDO::PARAM_INT); // Change this line to PDO::PARAM_INT
     $stmt->execute();
 
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($row) {
-        return $row['price'];
+        return (float) $row['price']; // Cast the result to a float
     }
 
     return false;
 }
+
 
 ?>

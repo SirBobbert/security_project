@@ -83,7 +83,7 @@ if ($itemCount > 0) {
                                 <form method="post"
                                     action="/demo/handleDeleteProduct/<?php echo isset($post['id']) ? $post['id'] : ''; ?>">
                                     <input type="hidden" name="id" value="<?php echo isset($post['id']) ? $post['id'] : ''; ?>">
-                                    <input type="submit" value="Delete Product">
+                                    <input type="submit" value="Delete product">
                                 </form>
                             </td>
                         <?php endif; ?>
