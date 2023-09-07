@@ -86,6 +86,9 @@
         <a class="btn btn-light" href="/demo/createUser">
             Create User
         </a>
+
+        <a class="btn btn-primary" href="/demo/index">Back</a>
+
     </div>
 </body>
 

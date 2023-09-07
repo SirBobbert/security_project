@@ -28,7 +28,6 @@ if ($role === 'admin') {
             <input type="submit" value="Logout" class="btn btn-primary btn-block">
         </form>
     </div>
-
 </body>
 
 </html>

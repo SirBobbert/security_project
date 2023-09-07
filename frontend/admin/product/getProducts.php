@@ -107,6 +107,8 @@ if ($itemCount > 0) {
                 Create product
             </a>
         <?php endif; ?>
+
+        <a class="btn btn-primary" href="/demo/index">Back</a>
     </div>
 
 </body>
@@ -131,17 +133,16 @@ if ($itemCount > 0) {
                 echo "<input type='submit' value='Remove'>";
                 echo "</form>";
             }
+
+            // Add a form for Confirm Purchase
+            echo "<form method='post' action='/demo/confirm'>";
+            echo "<input type='hidden' name='user_id' value='" . (isset($post['id']) ? $post['id'] : '') . "'>";
+            echo "<input type='submit' name='confirm_purchase' value='Confirm Purchase'>";
+            echo "</form>";
         } else {
             echo "<p>Your shopping cart is empty.</p>";
         }
         ?>
     </ul>
-
-    <!-- Add a form for Confirm Purchase -->
-    <form method="post" action="/demo/confirm">
-        <input type="hidden" name="user_id" value="<?php echo isset($post['id']) ? $post['id'] : ''; ?>">
-        <input type="submit" name="confirm_purchase" value="Confirm Purchase">
-    </form>
-
 
 <?php endif; ?>

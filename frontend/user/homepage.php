@@ -19,13 +19,10 @@ echo "User Role: " . $_SESSION['user_role'];
 
             <tbody>
                 <tr>
-                    <td><a href="/demo/getOrders">All orders</a></td>
+                    <td><a href="/demo/getOrders">Your orders</a></td>
                 </tr>
                 <tr>
                     <td><a href="/demo/getProducts">All products</a></td>
-                </tr>
-                <tr>
-                    <td><a href="/demo/getUsers">All users</a></td>
                 </tr>
             </tbody>
         </table>
