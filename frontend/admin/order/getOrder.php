@@ -20,47 +20,63 @@ $orderlinesData = $orderlines->getOrderlinesByOrderID($id);
 </head>
 
 <body>
-    <!-- Display the total price if available -->
-
-    <!-- Create an HTML table to display the orderlines -->
-    <h1>Order Details</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Product Name</th>
-                <th>Product Price</th>
-                <th>Quantity</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if (!empty($orderlinesData)): ?>
-                <?php foreach ($orderlinesData as $orderline): ?>
-                    <tr>
-                        <td>
-                            <?php echo $orderline['product_name']; ?>
-                        </td>
-                        <td>
-                            <?php echo number_format($orderline['product_price'], 2); ?>
-                        </td>
-                        <td>
-                            <?php echo $orderline['quantity']; ?>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
+    <div class="container">
+        <!-- Display the total price if available -->
+        <h1 class="mt-4">Order Details</h1>
+        <table class="table table-bordered table-striped">
+            <thead>
                 <tr>
-                    <td colspan="3">No order details found.</td>
+                    <th>Product Name</th>
+                    <th>Product Price</th>
+                    <th>Quantity</th>
+                   
                 </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php if (!empty($orderlinesData)): ?>
+                    <?php foreach ($orderlinesData as $orderline): ?>
+                        <tr>
+                            <td>
+                                <?php echo $orderline['product_name']; ?>
+                            </td>
+                            <td>
+                                <?php echo number_format($orderline['product_price'], 2); ?>
+                            </td>
+                            <td>
+                                <?php echo $orderline['quantity']; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="3">No order details found.</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
 
-    <h2>Total Price:
-        <?php echo !empty($orderlinesData) ? $orderlinesData[0]['total_price'] : 'N/A'; ?>
-    </h2>
+        <h2>Total Price:
+            <?php echo !empty($orderlinesData) ? $orderlinesData[0]['total_price'] : 'N/A'; ?>
+        </h2>
 
-    <a class="btn btn-primary" href="/demo/getOrders">Back</a>
+        <?php
+        // Check if the user is logged in and their role
+        $userRole = isset($_SESSION['user_role']) ? $_SESSION['user_role'] : '';
 
+        if ($userRole === 'admin') {
+            // If logged in as admin, link to /demo/getOrders
+            $backLink = '/demo/getOrders';
+        } elseif ($userRole === 'user') {
+            // If logged in as user, link to /demo/getUserOrders
+            $backLink = '/demo/getUserOrders';
+        } else {
+            // Default link if user role is not set or unknown
+            $backLink = '/demo/getOrders'; // You can change this to the appropriate default
+        }
+        ?>
+
+        <a class="btn btn-primary" href="<?php echo $backLink; ?>">Back</a>
+    </div>
 </body>
 
 </html>

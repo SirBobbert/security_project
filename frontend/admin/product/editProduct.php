@@ -52,26 +52,32 @@ if (isset($id)) {
 </head>
 
 <body>
-    <h2>Edit Product</h2>
-    <form method="post" action="/demo/handleEditProduct/<?php echo $product_arr['id']; ?>">
+    <div class="container">
+        <h2 class="mt-4">Edit Product</h2>
+        <form method="post" action="/demo/handleEditProduct/<?php echo $product_arr['id']; ?>">
 
-        <input type="hidden" name="id" value="<?php echo $product_arr['id']; ?>">
+            <input type="hidden" name="id" value="<?php echo $product_arr['id']; ?>">
 
-        <label for="name">Product Name:</label>
-        <input type="text" id="name" name="name" value="<?php echo $product_arr['name']; ?>"><br>
+            <div class="form-group">
+                <label for="name">Product Name:</label>
+                <input type="text" class="form-control" id="name" name="name" value="<?php echo $product_arr['name']; ?>">
+            </div>
 
-        <label for="price">Price:</label>
-        <input type="number" id="price" name="price" value="<?php echo $product_arr['price']; ?>"><br>
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" class="form-control" id="price" name="price" value="<?php echo $product_arr['price']; ?>">
+            </div>
 
-        <label for="description">Description:</label><br>
-        <textarea id="description" name="description"><?php echo $product_arr['description']; ?></textarea><br>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea class="form-control" id="description" name="description"><?php echo $product_arr['description']; ?></textarea>
+            </div>
 
-        <input type="submit" value="Update Product">
-    </form>
+            <button type="submit" class="btn btn-primary">Update Product</button>
+        </form>
 
-    <a class="btn btn-primary" href="/demo/getProducts">Back</a>
-
-
+        <a class="btn btn-secondary mt-3" href="/demo/getProducts">Back</a>
+    </div>
 </body>
 
 </html>

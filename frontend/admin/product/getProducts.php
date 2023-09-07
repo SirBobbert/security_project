@@ -50,7 +50,7 @@ if ($itemCount > 0) {
 <body>
     <div class="container">
         <h1>All products</h1>
-        <table class="table table-bordered">
+        <table class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>#</th>
@@ -102,13 +102,14 @@ if ($itemCount > 0) {
 
             </tbody>
         </table>
+
+        <a class="btn btn-primary" href="/demo/index">Back</a>
+
         <?php if ($userRole === "admin"): ?>
             <a class="btn btn-light" href="/demo/createProduct">
                 Create product
             </a>
         <?php endif; ?>
-
-        <a class="btn btn-primary" href="/demo/index">Back</a>
     </div>
 
 </body>
@@ -118,31 +119,42 @@ if ($itemCount > 0) {
 <!-- Add this section to display the shopping cart -->
 <?php if ($userRole === "user"): ?>
 
-    <h2>Shopping Cart</h2>
-    <ul>
-        <?php
-        // Check if the shopping cart session variable exists
-        if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
-            foreach ($_SESSION['cart'] as $productId => $quantity) {
-                // Retrieve and display product details here based on $productId
-                // You can query your database to get product information.
-                echo "<li>Product ID: $productId - Quantity: $quantity</li>";
-                // Add a form to remove the product from the cart
-                echo "<form method='post' action='/demo/removeFromCart'>";
-                echo "<input type='hidden' name='remove_id' value='$productId'>";
-                echo "<input type='submit' value='Remove'>";
-                echo "</form>";
-            }
+    <div class="card mt-5">
+        <div class="card-header">
+            <h2 class="card-title">Shopping Cart</h2>
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                <?php
+                // Check if the shopping cart session variable exists
+                if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
+                    foreach ($_SESSION['cart'] as $productId => $quantity) {
+                        // Retrieve and display product details here based on $productId
+                        // You can query your database to get product information.
+                        echo "<li class='list-group-item'>Product ID: $productId - Quantity: $quantity";
 
-            // Add a form for Confirm Purchase
-            echo "<form method='post' action='/demo/confirm'>";
-            echo "<input type='hidden' name='user_id' value='" . (isset($post['id']) ? $post['id'] : '') . "'>";
-            echo "<input type='submit' name='confirm_purchase' value='Confirm Purchase'>";
-            echo "</form>";
-        } else {
-            echo "<p>Your shopping cart is empty.</p>";
-        }
-        ?>
-    </ul>
+                        // Add a form to remove the product from the cart
+                        echo "<form method='post' action='/demo/removeFromCart' class='float-right'>";
+                        echo "<input type='hidden' name='remove_id' value='$productId'>";
+                        echo "<button type='submit' class='btn btn-danger btn-sm'>Remove</button>";
+                        echo "</form>";
+
+                        echo "</li>";
+                    }
+
+                    // Add a form for Confirm Purchase
+                    echo "<li class='list-group-item'>";
+                    echo "<form method='post' action='/demo/confirm'>";
+                    echo "<input type='hidden' name='user_id' value='" . (isset($post['id']) ? $post['id'] : '') . "'>";
+                    echo "<button type='submit' name='confirm_purchase' class='btn btn-success'>Confirm Purchase</button>";
+                    echo "</form>";
+                    echo "</li>";
+                } else {
+                    echo "<li class='list-group-item'>Your shopping cart is empty.</li>";
+                }
+                ?>
+            </ul>
+        </div>
+    </div>
 
 <?php endif; ?>

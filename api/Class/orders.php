@@ -54,8 +54,15 @@ class Order
         }
     }
 
-
-
+    // Add a method to retrieve orders by user ID
+    public function getOrdersByUserID($user_id)
+    {
+        $query = "SELECT * FROM orders WHERE user_id = :user_id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt;
+    }
 }
 
 ?>

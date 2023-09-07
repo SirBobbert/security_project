@@ -8,7 +8,7 @@ $db = $database->getConnection();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get data from the POST request
-    $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '';
+    $user_id = $_SESSION['user_id'];
 
     // Calculate the total amount based on the cart contents and include shipping cost
     $total_amount = calculateTotalAmount($db, $_SESSION['cart']);

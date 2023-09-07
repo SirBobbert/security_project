@@ -15,9 +15,7 @@ if ($user->email != null) {
         "password" => $user->password,
         "typeID" => $user->typeID
     );
-
     http_response_code(200);
-    echo json_encode($user_arr);
 } else {
     http_response_code(404);
     echo json_encode("User not found.");
@@ -30,12 +28,44 @@ if ($user->email != null) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>User Details</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body>
-    <a class="btn btn-primary" href="/demo/getUsers">Back</a>
+    <div class="container">
+        <h1 class="mt-4">User Details</h1>
+
+        <!-- Display user details -->
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Type ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <?php echo $user_arr['id']; ?>
+                    </td>
+                    <td>
+                        <?php echo $user_arr['email']; ?>
+                    </td>
+                    <td>
+                        <?php echo $user_arr['password']; ?>
+                    </td>
+                    <td>
+                        <?php echo $user_arr['typeID']; ?>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a class="btn btn-primary" href="/demo/getUsers">Back</a>
+    </div>
 </body>
 
 </html>

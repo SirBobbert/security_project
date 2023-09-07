@@ -42,6 +42,9 @@ if ($stmt) {
         if (password_verify($password, $stored_hashed_password)) {
             // Password is correct
 
+            // Set the user ID in the session
+            $_SESSION['user_id'] = $user['ID']; // Assuming 'id' is the column name for the user ID
+
             // Check user's type and redirect accordingly
             if ($user['typeID'] == 1) {
                 $_SESSION['user_role'] = 'admin';

@@ -51,13 +51,17 @@ if ($orderCount > 0) {
 <body>
     <div class="container">
         <h1>All Orders</h1>
-        <table class="table table-bordered">
+        <table class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>Order ID</th>
                     <th>User ID</th>
                     <th>Order Date</th>
                     <th>Total Amount</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+
                 </tr>
             </thead>
             <tbody>

@@ -41,7 +41,7 @@
 
     <div class="container">
         <h1>All Users</h1>
-        <table class="table table-bordered">
+        <table class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>#</th>
@@ -83,11 +83,13 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
+
+        <a class="btn btn-primary" href="/demo/index">Back</a>
+
         <a class="btn btn-light" href="/demo/createUser">
             Create User
         </a>
 
-        <a class="btn btn-primary" href="/demo/index">Back</a>
 
     </div>
 </body>

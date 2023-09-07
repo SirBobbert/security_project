@@ -9,6 +9,15 @@
 
 <?php
 echo "User Role: " . $_SESSION['user_role'];
+
+
+if (isset($_SESSION['user_id'])) {
+    $userID = $_SESSION['user_id'];
+    echo "User ID: " . $userID;
+} else {
+    // Handle the case when the user is not logged in
+    echo "User is not logged in.";
+}
 ?>
 
 <body>
@@ -19,7 +28,7 @@ echo "User Role: " . $_SESSION['user_role'];
 
             <tbody>
                 <tr>
-                    <td><a href="/demo/getOrders">Your orders</a></td>
+                    <td><a href="/demo/getUserOrders">Your orders</a></td>
                 </tr>
                 <tr>
                     <td><a href="/demo/getProducts">All products</a></td>

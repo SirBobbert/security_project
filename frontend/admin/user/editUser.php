@@ -52,26 +52,32 @@ if (isset($id)) {
 </head>
 
 <body>
-    <h2>Edit User</h2>
-    <form method="post" action="/demo/handleEditUser/<?php echo $user_arr['id']; ?>">
+    <div class="container">
+        <h2 class="mt-4">Edit User</h2>
+        <form method="post" action="/demo/handleEditUser/<?php echo $user_arr['id']; ?>">
 
-        <input type="hidden" name="id" value="<?php echo $user_arr['id']; ?>">
+            <input type="hidden" name="id" value="<?php echo $user_arr['id']; ?>">
 
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email" value="<?php echo $user_arr['email']; ?>"><br>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" class="form-control" id="email" name="email" value="<?php echo $user_arr['email']; ?>">
+            </div>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" value="<?php echo $user_arr['password']; ?>"><br>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" value="<?php echo $user_arr['password']; ?>">
+            </div>
 
-        <label for="typeID">Type ID:</label>
-        <input type="text" id="typeID" name="typeID" value="<?php echo $user_arr['typeID']; ?>"><br>
+            <div class="form-group">
+                <label for="typeID">Type ID:</label>
+                <input type="text" class="form-control" id="typeID" name="typeID" value="<?php echo $user_arr['typeID']; ?>">
+            </div>
 
-        <input type="submit" value="Update User">
-    </form>
+            <button type="submit" class="btn btn-primary">Update User</button>
+        </form>
 
-    <a class="btn btn-primary" href="/demo/getUsers">Back</a>
-
-
+        <a class="btn btn-secondary mt-3" href="/demo/getUsers">Back</a>
+    </div>
 </body>
 
 </html>
