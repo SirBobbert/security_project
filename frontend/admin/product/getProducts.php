@@ -88,19 +88,14 @@ if ($itemCount > 0) {
                             </td>
                         <?php endif; ?>
 
-
-
-
                         <?php if ($userRole === "user"): ?>
                             <td>
-                            <td><a href="/demo/handleAddToCart/<?php echo isset($post['id']) ? $post['id'] : ''; ?>">See more</a>
-
+                                <form method="post" action="/demo/handleAddToCart">
+                                    <input type="hidden" name="id" value="<?php echo isset($post['id']) ? $post['id'] : ''; ?>">
+                                    <input type="submit" value="Add to cart">
+                                </form>
                             </td>
                         <?php endif; ?>
-
-
-
-
 
                     </tr>
                 <?php endforeach; ?>
@@ -117,3 +112,41 @@ if ($itemCount > 0) {
 </body>
 
 </html>
+
+<!-- Add this section to display the shopping cart -->
+<?php if ($userRole === "user"): ?>
+
+    <h2>Shopping Cart</h2>
+    <ul>
+        <?php
+
+        echo isset($post['id']) ? $post['id'] : '';
+
+
+
+        // Check if the shopping cart session variable exists
+        if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
+            foreach ($_SESSION['cart'] as $productId => $quantity) {
+                // Retrieve and display product details here based on $productId
+                // You can query your database to get product information.
+                echo "<li>Product ID: $productId - Quantity: $quantity</li>";
+                // Add a form to remove the product from the cart
+                echo "<form method='post' action='/demo/removeFromCart'>";
+                echo "<input type='hidden' name='remove_id' value='$productId'>";
+                echo "<input type='submit' value='Remove'>";
+                echo "</form>";
+            }
+        } else {
+            echo "<p>Your shopping cart is empty.</p>";
+        }
+        ?>
+    </ul>
+
+    <!-- Add a form for Confirm Purchase -->
+    <form method="post" action="/demo/confirm">
+        <input type="hidden" name="user_id" value="<?php echo isset($post['id']) ? $post['id'] : ''; ?>">
+        <input type="submit" name="confirm_purchase" value="Confirm Purchase">
+    </form>
+
+
+<?php endif; ?>

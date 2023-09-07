@@ -55,8 +55,9 @@ if ($role === 'admin') {
 if ($role === 'user') {
     get('/demo/user/home', 'frontend/user/homepage.php');
 
-    get('/demo/handleAddToCart/$id', 'frontend/user/handleAddToCart.php');
-
+    post('/demo/handleAddToCart', 'frontend/cart/handleAddToCart.php');
+    post('/demo/removeFromCart', 'frontend/cart/handleRemoveFromCart.php');
+    post('/demo/confirm', 'frontend/cart/handleConfirmPurchase.php');
 
 
 }
