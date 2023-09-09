@@ -33,9 +33,12 @@ if ($orderCount > 0) {
     }
 } else {
     http_response_code(404);
-    echo json_encode(
-        array("message" => "No record found.")
-    );
+    // Display a styled message if there are no orders
+    echo '<div class="alert alert-info" role="alert">';
+    echo '<h4 class="alert-heading">No orders found</h4>';
+    echo '<p>Sorry, there are currently no orders available.</p>';
+    echo '</div>';
+    exit; // Stop execution if there are no orders
 }
 ?>
 
@@ -83,18 +86,31 @@ if ($orderCount > 0) {
 
 
                         <td>
-                            <a href="/demo/getOrder/<?php echo isset($order['order_id']) ? $order['order_id'] : ''; ?>">See order</a>
+                            <a href="/demo/getOrder/<?php echo isset($order['order_id']) ? $order['order_id'] : ''; ?>">See
+                                order</a>
                         </td>
 
-                        <td><a href="/demo/editProduct/<?php echo isset($post['id']) ? $post['id'] : ''; ?>">Edit
-                                order</a></td>
+                        <td>
+                            <a href="/demo/editOrder/<?php echo isset($order['order_id']) ? $order['order_id'] : ''; ?>">
+                                Edit order
+                            </a>
+                        </td>
+
+
                         <td>
                             <form method="post"
-                                action="/demo/handleDeleteProduct/<?php echo isset($post['id']) ? $post['id'] : ''; ?>">
-                                <input type="hidden" name="id" value="<?php echo isset($post['id']) ? $post['id'] : ''; ?>">
+                                action="/demo/handleDeleteOrder/<?php echo isset($order['order_id']) ? $order['order_id'] : ''; ?>">
+                                <input type="hidden" name="order_id"
+                                    value="<?php echo isset($order['order_id']) ? $order['order_id'] : ''; ?>">
                                 <input type="submit" value="Delete order">
                             </form>
                         </td>
+
+
+
+
+
+
 
 
 

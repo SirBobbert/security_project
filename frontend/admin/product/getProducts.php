@@ -16,27 +16,39 @@ $items = new Product($db);
 $stmt = $items->getProducts();
 $itemCount = $stmt->rowCount();
 
-if ($itemCount > 0) {
-
-    $productArray = array();
-    $productArray["body"] = array();
-    $productArray["itemCount"] = $itemCount;
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $e = array(
-            "id" => $row['id'],
-            "name" => $row['name'],
-            "price" => $row['price'],
-            "description" => $row['description']
-        );
-        array_push($productArray["body"], $e);
-    }
-} else {
+if ($itemCount === 0) {
     http_response_code(404);
-    echo json_encode(
-        array("message" => "No record found.")
+    // Display a styled message if there are no products
+    echo '<div class="alert alert-info" role="alert">';
+    echo '<h4 class="alert-heading">No products found</h4>';
+    echo '<p>Sorry, there are currently no products available.</p>';
+    echo '</div>';
+
+    // Display "Create product" button for admins
+    if ($userRole === "admin") {
+        echo '<a class="btn btn-light" href="/demo/createProduct">';
+        echo 'Create product';
+        echo '</a>';
+    }
+
+    exit; // Stop execution if there are no products
+}
+
+$productArray = array();
+$productArray["body"] = array();
+$productArray["itemCount"] = $itemCount;
+
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $e = array(
+        "id" => $row['id'],
+        "name" => $row['name'],
+        "price" => $row['price'],
+        "description" => $row['description']
     );
+    array_push($productArray["body"], $e);
 }
 ?>
+
 
 <!DOCTYPE html>
 <html>

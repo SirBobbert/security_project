@@ -22,12 +22,4 @@ if ($role === 'admin') {
 }
 ?>
 
-<body>
-    <div class="container">
-        <form action="/demo/logout" method="post">
-            <input type="submit" value="Logout" class="btn btn-primary btn-block">
-        </form>
-    </div>
-</body>
-
 </html>

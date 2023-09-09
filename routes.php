@@ -46,8 +46,9 @@ if ($role === 'admin') {
     get('/demo/getOrders', 'frontend/admin/order/getOrders.php');
     // orders update
     get('/demo/editOrder/$id', 'frontend/admin/order/editOrder.php');
+
     // orders delete
-    get('/demo/deleteOrder/$id', 'frontend/admin/order/deleteOrder.php');
+    post('/demo/handleDeleteOrder/$order_id', 'api/orderAPI/handleDeleteOrder.php');
 }
 
 // User routes

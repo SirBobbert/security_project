@@ -34,12 +34,18 @@ class OrderLine
 
     public function getOrderlinesByOrderID($orderID)
     {
-        $sqlQuery = "SELECT products.name AS product_name, orderlines.product_price, orderlines.quantity, orders.total_amount AS total_price
-                 FROM orderlines
-                 JOIN products ON orderlines.product_id = products.id
-                 JOIN orders ON orderlines.order_id_fk = orders.order_id
-                 WHERE orderlines.order_id_fk = :order_id";
-
+        $sqlQuery = "SELECT
+            orderlines.orderline_id,
+            products.id AS product_id,
+            products.name AS product_name,
+            orderlines.product_price,
+            orderlines.quantity,
+            orders.total_amount AS total_price
+        FROM orderlines
+        JOIN products ON orderlines.product_id = products.id
+        JOIN orders ON orderlines.order_id_fk = orders.order_id
+        WHERE orderlines.order_id_fk = :order_id";
+    
         try {
             $stmt = $this->conn->prepare($sqlQuery);
             $stmt->bindParam(':order_id', $orderID, PDO::PARAM_INT);
@@ -51,7 +57,7 @@ class OrderLine
             return false;
         }
     }
-
+    
 
 
 

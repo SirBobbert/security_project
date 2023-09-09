@@ -19,13 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $item->id = $id;
 
         // Attempt to delete the product
-        if ($item->deleteProduct()) {
-            // Product deleted successfully, you can redirect the user to the "getProducts" page
+        if ($item->deleteProduct($id)) {
             header("Location: http://localhost/demo/getProducts");
             exit();
         } else {
-            // Product deletion failed, you can handle this case (e.g., display an error message)
-            echo "Product could not be deleted.";
+            echo "Product could not be deleted. Check for errors:<br>";
+            echo $item->deleteProduct($id); // This will display any error message from the deleteProduct method.
         }
     } else {
         // Handle missing "id" parameter
