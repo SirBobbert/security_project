@@ -49,6 +49,7 @@ if ($role === 'admin') {
 
     // orders delete
     post('/demo/handleDeleteOrder/$order_id', 'api/orderAPI/handleDeleteOrder.php');
+    post('/demo/handleDeleteOrderline/$orderline_id', 'api/orderAPI/handleDeleteOrderline.php');
 }
 
 // User routes

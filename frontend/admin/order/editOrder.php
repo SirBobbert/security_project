@@ -78,23 +78,29 @@ if (isset($id)) {
                 </p>
             </div>
 
-            <!-- Display associated order lines for this order -->
-            <h3>Order Lines:</h3>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Orderline ID</th>
-                        <th>Product ID</th>
-                        <th>Quantity</th>
-                        <th>Product Price</th>
-                        <th>Total Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $totalOrderPrice = 0; // Initialize total order price
-                    if (!empty($order_lines)):
-                        ?>
+            <!-- Rest of your code... -->
+
+            <?php
+
+            echo $id;
+            echo $id;
+            echo $id;
+
+            $totalOrderPrice = 0; // Initialize total order price
+            if (!empty($order_lines)):
+                ?>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Orderline ID</th>
+                            <th>Product ID</th>
+                            <th>Quantity</th>
+                            <th>Product Price</th>
+                            <th>Total Price</th>
+                            <th>Action</th> <!-- Add a column for actions -->
+                        </tr>
+                    </thead>
+                    <tbody>
                         <?php foreach ($order_lines as $order_line): ?>
                             <tr>
                                 <td>
@@ -104,7 +110,12 @@ if (isset($id)) {
                                     <?php echo isset($order_line['product_id']) ? $order_line['product_id'] : ''; ?>
                                 </td>
                                 <td>
-                                    <?php echo isset($order_line['quantity']) ? $order_line['quantity'] : ''; ?>
+                                    <form method="post"
+                                        action="/demo/updateOrderLine/<?php echo $order_line['orderline_id']; ?>">
+                                        <input type="number" name="quantity"
+                                            value="<?php echo isset($order_line['quantity']) ? $order_line['quantity'] : ''; ?>">
+                                        <input type="submit" value="Update">
+                                    </form>
                                 </td>
                                 <td>
                                     <?php echo isset($order_line['product_price']) ? $order_line['product_price'] : ''; ?>
@@ -118,15 +129,32 @@ if (isset($id)) {
                                     }
                                     ?>
                                 </td>
+                                <td>
+                                    <!-- Modify the form action to include the order ID -->
+                                    <form method="post"
+                                        action="/demo/handleDeleteOrderline/<?php echo $order_line['orderline_id']; ?>">
+                                        <input type="hidden" name="orderline_id"
+                                            value="<?php echo isset($order_line['orderline_id']) ? $order_line['orderline_id'] : ''; ?>">
+                                        <!-- Add a hidden input for the 'id' parameter -->
+                                        <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                        <input type="submit" value="Delete">
+                                    </form>
+
+
+
+
+                                </td>
+
+
                             </tr>
                         <?php endforeach; ?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="6">No order lines found for this order.</td>
-                        </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <p>No order lines found for this order.</p>
+            <?php endif; ?>
+
+
 
             <!-- Display total order price at the bottom -->
             <div class="mt-3">
